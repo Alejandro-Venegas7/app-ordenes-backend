@@ -1,17 +1,50 @@
-import express, { Request, Response, NextFunction } from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
-import { ParsedQs } from 'qs';
+import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const mongoURI = 'mongodb+srv://Aleuser:user123@ordenes-servicio.bw4iv.mongodb.net/?retryWrites=true&w=majority&appName=Ordenes-Servicio';
-app.get('/health', async (req: Request, res: Response)=>{
-  res.send({message: "Servidor OK"})
-})
+
+// Configuración de CORS actualizada
+const allowedOrigins = [
+  'https://app-ordenes-frontend.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://app-ordenes-backend.onrender.com'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // Permitir solicitudes sin origen (como las herramientas de desarrollo)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
+  credentials: true
+}));
+
+// El resto de tu código del servidor permanece igual...
+
+app.use(bodyParser.json());
+
+// Ruta de health check
+app.get('/health', async (req: Request, res: Response) => {
+  res.send({ 
+    message: "Servidor OK",
+    dbStatus: mongoose.connection.readyState
+  });
+});
+// Conexión a MongoDB
 mongoose.connect(mongoURI)
   .then(() => console.log('Conectado a MongoDB'))
   .catch((error: any) => console.error('Error de conexión a MongoDB:', error));
@@ -32,6 +65,7 @@ const Order = mongoose.model('Order', orderSchema);
 
 app.use(cors());
 app.use(bodyParser.json());
+
 
 // Ruta para crear una nueva orden
 app.post('/api/orders', async (req: Request, res: Response) => {
