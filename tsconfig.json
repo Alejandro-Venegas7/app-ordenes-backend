@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./src",
     "target": "ES6",
     "module": "commonjs",
     "esModuleInterop": true,
@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "moduleResolution": "node"  // Agrega esta línea si aún no está
   },
-  "include": ["server.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
