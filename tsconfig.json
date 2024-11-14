@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist", // Asegúrate de que el código compilado se coloque en `dist`
-    "rootDir": "./", // Carpeta raíz de tus archivos fuente
+    "outDir": "./dist",
+    "rootDir": "./",
     "target": "ES6",
     "module": "commonjs",
     "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node"  // Agrega esta línea si aún no está
   },
-  "include": ["server.ts"], // Incluye tu archivo server.ts o la ruta de tus archivos fuente
+  "include": ["server.ts"],
   "exclude": ["node_modules"]
 }

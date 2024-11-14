@@ -14,7 +14,8 @@ app.get('/health', async (req: Request, res: Response)=>{
 })
 mongoose.connect(mongoURI)
   .then(() => console.log('Conectado a MongoDB'))
-  .catch((error) => console.error('Error de conexión a MongoDB:', error));
+  .catch((error: any) => console.error('Error de conexión a MongoDB:', error));
+
 
 const orderSchema = new mongoose.Schema({
   brand: String,
