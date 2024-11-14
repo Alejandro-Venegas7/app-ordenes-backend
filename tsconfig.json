@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",                     // Compilación a ES6
-    "module": "commonjs",                // Usar CommonJS para la resolución de módulos
-    "strict": true,                      // Habilitar modo estricto
-    "esModuleInterop": true,             // Permitir la interoperabilidad de módulos
-    "skipLibCheck": true,                // Ignorar chequeo de tipos de las librerías
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",                  // Directorio de salida
-    "moduleResolution": "node",          // Usar resolución de módulos como en Node.js
-    "allowSyntheticDefaultImports": true // Soporte para importaciones por defecto sintéticas
+    "outDir": "./dist", // Asegúrate de que el código compilado se coloque en `dist`
+    "rootDir": "./", // Carpeta raíz de tus archivos fuente
+    "target": "ES6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "*.ts"],    // Incluir archivos TypeScript
-  "exclude": ["node_modules"]            // Excluir node_modules
+  "include": ["server.ts"], // Incluye tu archivo server.ts o la ruta de tus archivos fuente
+  "exclude": ["node_modules"]
 }
