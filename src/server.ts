@@ -105,27 +105,8 @@ app.put('/api/orders/:id', async (req: Request, res: Response) => {
     res.status(400).json({ error: 'Error al actualizar la orden' });
   }
 });
-app.get('/api/orders/:id', async (req: any, res: any) => {
-  try {
-    const { id } = req.params;
-    
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ error: 'ID de orden inválido' });
-    }
 
-    const order = await Order.findById(id);
-    
-    if (!order) {
-      return res.status(404).json({ error: 'Orden no encontrada' });
-    }
-
-    const idSlice = order._id.toString().slice(-4);
-    res.json({ ...order.toObject(), idSlice });
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener la orden' });
-  }
-});
-
+//Nuevo comentario
 app.delete('/api/orders/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
